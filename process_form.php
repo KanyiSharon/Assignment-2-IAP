@@ -1,11 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    // Preflight request. Respond with 200 OK.
-    exit(0);
-}
+
 // Database credentials
 $servername = "127.0.0.1:3307"; // Database server (usually localhost)
 $username = "root2"; // Database username
@@ -20,7 +14,6 @@ try {
 
     // Debugging: Check if form data is being posted
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        echo "Form submitted via POST.<br>";
 
         // Debugging: Check if $_POST['email'] and $_POST['password'] are set
         if (isset($_POST['email']) && isset($_POST['password'])) {

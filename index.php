@@ -4,8 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up Form</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="styles.css" rel="stylesheet">
+    <style>
+      body{
+    background-image: linear-gradient(to bottom,#3ebdb4,#fff4ea);
+    background-repeat: no-repeat;
+    height: 115vh;
+}
+      
+      .form{
+       margin-top:-100px;
+       border:2px white solid;
+       box-shadow:2px 2px 80px white;
+      }
+    </style>
+    
 </head>
 <body>
     <div class="form">
