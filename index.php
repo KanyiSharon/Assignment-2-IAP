@@ -9,10 +9,10 @@
     <link href="styles.css" rel="stylesheet">
     <style>
       body{
-    background-image: linear-gradient(to bottom,#3ebdb4,#fff4ea);
-    background-repeat: no-repeat;
-    height: 100vh;
-}
+          background-image: linear-gradient(to bottom,#3ebdb4,#fff4ea);
+          background-repeat: no-repeat;
+          height: 100vh;
+          }
       
       .form{
         margin-top:250px;
@@ -20,12 +20,20 @@
        border:2px white solid;
        box-shadow:2px 2px 80px white;
       }
+      nav{
+        background-color: #33576E;
+        padding: 10px;
+        width: 30%;
+        box-shadow:5px 5px 70px white;
+      }
     </style>
     
 </head>
 <body>
-  <nav> <ul>
-    <li><a href="displaydata.php"> Click here to display current users</a></li>
+  <nav> <ul >
+    <li style="list-style-type:none; color:white;">
+        <a href="displaydata.php" style="text-decoration:none;background-color:white;"> Click here to display current users</a>
+    </li>
   </ul></nav>
     <div class="form">
     <form method="POST"action="process_form.php" >
