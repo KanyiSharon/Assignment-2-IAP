@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 // Database credentials
 $servername = "127.0.0.1:3307"; // Database server (usually localhost)
-$username = "root"; // Database username
+$username = "root2"; // Database username
 $password = ""; // Database password (change if necessary)
 $dbname = "iap"; // Replace with your database name
 

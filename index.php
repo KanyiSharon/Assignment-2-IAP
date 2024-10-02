@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="form">
-    <form action="http://127.0.0.1:3307/153486-Assignment 2 IAP/process_form.php" method="POST">
+    <form method="POST"action="process_form.php" >
         <h1 style="text-align: center;">Login</h1>
         <div class="mb-3 ">
           <label for="exampleInputEmail1" class="form-label">Email address</label>
