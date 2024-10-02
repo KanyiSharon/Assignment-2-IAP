@@ -2,7 +2,7 @@
 
 // Database credentials
 $servername = "127.0.0.1:3307"; // Database server (usually localhost)
-$username = "root2"; // Database username
+$username = "root"; // Database username
 $password = ""; // Database password (change if necessary)
 $dbname = "iap"; // Replace with your database name
 

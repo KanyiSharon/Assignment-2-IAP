@@ -24,9 +24,12 @@
     
 </head>
 <body>
+  <nav> <ul>
+    <li><a href="displaydata.php"> Click here to display current users</a></li>
+  </ul></nav>
     <div class="form">
     <form method="POST"action="process_form.php" >
-        <h1 style="text-align: center;">Login</h1>
+        <h1 style="text-align: center;">Sign Up</h1>
         <div class="mb-3 ">
           <label for="exampleInputEmail1" class="form-label">Email address</label>
           <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
