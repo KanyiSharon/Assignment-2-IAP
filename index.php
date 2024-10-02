@@ -11,11 +11,12 @@
       body{
     background-image: linear-gradient(to bottom,#3ebdb4,#fff4ea);
     background-repeat: no-repeat;
-    height: 115vh;
+    height: 57vh;
 }
       
       .form{
-       margin-top:-100px;
+        margin-top:250px;
+
        border:2px white solid;
        box-shadow:2px 2px 80px white;
       }
