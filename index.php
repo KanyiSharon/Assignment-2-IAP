@@ -11,7 +11,7 @@
       body{
     background-image: linear-gradient(to bottom,#3ebdb4,#fff4ea);
     background-repeat: no-repeat;
-    height: 57vh;
+    height: 100vh;
 }
       
       .form{

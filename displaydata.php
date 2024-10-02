@@ -18,6 +18,24 @@ try {
 
     // Fetch all users as an associative array
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //Add styling to table
+    echo "
+        <style>
+            body {
+                background-image: linear-gradient(to bottom, #3ebdb4, #fff4ea);
+                background-repeat: no-repeat;
+            }
+            table{
+                margin:20%;
+                margin-left:30%;
+                border-radius: 20px;
+                background-color:#A2AEB3;
+                padding: 20px;
+                border:2px white solid;
+                 box-shadow:2px 2px 80px white;
+            }
+        </style>
+    ";
 
     // Display the users in an HTML table
     echo "<table border='1'>";
