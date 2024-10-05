@@ -13,6 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Here you can add code to log the user in, e.g., set session variables, redirect, etc.
                 echo "Verification successful. You are now logged in.";
                 // Clear the session variables
+                header('Location: index.php');
+                 exit();
                 session_unset();
                 session_destroy();
         } else {
