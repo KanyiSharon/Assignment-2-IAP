@@ -3,7 +3,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require 'vendor/autoload.php'; // Ensure you have installed PHPMailer via Composer
+    require 'vendor/autoload.php'; 
 
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         //Server settings
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com'; // Set the SMTP server to send through
+        $mail->Host       = 'smtp.gmail.com'; // Gmail STMP Server
         $mail->SMTPAuth   = true;
         $mail->Username   = 'sharon.kanyi@strathmore.edu'; // SMTP username
         $mail->Password   = 'fmok fuxw trnm vqck'; // SMTP password
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         //Recipients
         $mail->setFrom('sharon.kanyi@strathmore.edu', 'Mailer');
-        $mail->addAddress($email); // Add a recipient
+        $mail->addAddress($email); 
 
         // Content
         $mail->isHTML(true);

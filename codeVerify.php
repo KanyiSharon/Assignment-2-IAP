@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $enteredCode = $_POST['verification_code'];
 
         if ($enteredCode == $_SESSION['verification_code']) {
-                // Verification successful, proceed with login
+                //  After is Verification successful, proceed with login
                 $email = $_SESSION['email'];
                 $password = $_SESSION['password'];
                 $remember = $_SESSION['remember'];

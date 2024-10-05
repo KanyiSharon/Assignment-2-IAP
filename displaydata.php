@@ -1,5 +1,5 @@
 <?php
-
+//Databse Credentials
 class Database {
     private $servername = "127.0.0.1:3307";
     private $username = "root";
