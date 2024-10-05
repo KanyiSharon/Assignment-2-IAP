@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Content
         $mail->isHTML(true);
         $mail->Subject = 'Here is your Verification code..';
-        $mail->Body    = 'Your verification code is .$verificationCode';
+        $mail->Body    = 'Your verification code is' .$verificationCode;
         
 
         $mail->send();
