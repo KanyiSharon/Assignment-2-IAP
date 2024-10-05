@@ -35,13 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Content
         $mail->isHTML(true);
         $mail->Subject = 'Here is your Verification code..';
-        $mail->Body    = 'Your verification code is' .$verificationCode;
+        $mail->Body    = 'Your verification code is' .'<br>' .$verificationCode;
         
 
         $mail->send();
         echo 'Message has been sent to your email';
    // Redirect to verification page
-        header('Location: codeverify.php');
+        header('Location: codeVerify.php');
         exit();
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
