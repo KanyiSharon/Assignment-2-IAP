@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="form">
-        <form method="POST" action="verify.php">
+        <form method="POST" action="codeVerify.php">
                 <h1 style="text-align: center;">Enter Verification Code</h1>
                 <div class="mb-3">
                     <label for="verification_code" class="form-label">Verification Code</label>
