@@ -1,5 +1,4 @@
 <?php
-
 class Database {
     private $servername = "127.0.0.1:3307";
     private $username = "root";
@@ -35,6 +34,17 @@ class FormProcessor {
                 $password = $_POST['password'];
                 $remember = isset($_POST['remember']) ? 1 : 0;
 
+                // Server-side validation
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    echo "Invalid email format.";
+                    return;
+                }
+
+                if (strlen($password) < 6) {
+                    echo "Password must be at least 6 characters long.";
+                    return;
+                }
+
                 $stmt = $this->db->prepare("INSERT INTO users (email, password, remember) VALUES (:email, :password, :remember)");
                 $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':password', $password);
@@ -60,6 +70,4 @@ class FormProcessor {
 $db = new Database();
 $formProcessor = new FormProcessor($db);
 $formProcessor->processForm();
-
-?>
 ?>
