@@ -1,12 +1,69 @@
+<?php
+use PHPMailer\PHPMailer\PHPMailer;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require 'vendor/autoload.php'; // Ensure you have installed PHPMailer via Composer
+
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $remember = isset($_POST['remember']) ? 'Yes' : 'No';
+
+    $mail = new PHPMailer(true);
+
+    try {
+        //Server settings
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com'; // Set the SMTP server to send through
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'sharon.kanyi@strathmore.edu'; // SMTP username
+        $mail->Password   = 'fmok fuxw trnm vqck'; // SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
+
+        //Recipients
+        $mail->setFrom('sharon.kanyi@strathmore.edu', 'Mailer');
+        $mail->addAddress($email); // Add a recipient
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = '2FA ';
+        $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+        $mail->send();
+        echo 'Message has been sent';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up Form</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function validateForm() {
+            const email = document.forms["signupForm"]["email"].value;
+            const password = document.forms["signupForm"]["password"].value;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters long.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
     <style>
       body{
           background-image: linear-gradient(to bottom,#3ebdb4,#fff4ea);
@@ -27,7 +84,6 @@
         box-shadow:5px 5px 70px white;
       }
     </style>
-    
 </head>
 <body>
   <nav>
@@ -38,7 +94,7 @@
     </ul>
   </nav>
   <div class="form">
-    <form name="signupForm" method="POST" action="process_form.php" onsubmit="return validateForm()">
+    <form name="signupForm" method="POST" action="index.php" onsubmit="return validateForm()">
         <h1 style="text-align: center;">Sign Up</h1>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Email address</label>
