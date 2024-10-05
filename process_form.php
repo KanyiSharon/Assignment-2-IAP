@@ -1,52 +1,65 @@
 <?php
 
-// Database credentials
-$servername = "127.0.0.1:3307"; // Database server (usually localhost)
-$username = "root"; // Database username
-$password = ""; // Database password (change if necessary)
-$dbname = "iap"; // Replace with your database name
+class Database {
+    private $servername = "127.0.0.1:3307";
+    private $username = "root";
+    private $password = "";
+    private $dbname = "iap";
+    public $conn;
 
-try {
-    // Create a new PDO connection
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    // Set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // Debugging: Check if form data is being posted
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-        // Debugging: Check if $_POST['email'] and $_POST['password'] are set
-        if (isset($_POST['email']) && isset($_POST['password'])) {
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            $remember = isset($_POST['remember']) ? 1 : 0;
-
-            // Prepare the SQL statement
-            $stmt = $conn->prepare("INSERT INTO users (email, password, remember) VALUES (:email, :password, :remember)");
-
-            // Bind parameters to the SQL query
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':password', $password);
-            $stmt->bindParam(':remember', $remember);
-
-            // Execute the statement
-            $stmt->execute();
-
-            echo "New record created successfully";
-        } else {
-            echo "Error: Email or Password is missing.<br>";
-            // Debugging: Print the content of $_POST
-            echo "<pre>";
-            print_r($_POST);
-            echo "</pre>";
+    public function __construct() {
+        try {
+            $this->conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
         }
-    } else {
-        echo "Form not submitted via POST.";
     }
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+
+    public function __destruct() {
+        $this->conn = null;
+    }
 }
 
-// Close connection (optional, PDO closes connection automatically when the script ends)
-$conn = null;
+class FormProcessor {
+    private $db;
+
+    public function __construct(Database $db) {
+        $this->db = $db->conn;
+    }
+
+    public function processForm() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['email']) && isset($_POST['password'])) {
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+                $remember = isset($_POST['remember']) ? 1 : 0;
+
+                $stmt = $this->db->prepare("INSERT INTO users (email, password, remember) VALUES (:email, :password, :remember)");
+                $stmt->bindParam(':email', $email);
+                $stmt->bindParam(':password', $password);
+                $stmt->bindParam(':remember', $remember);
+
+                if ($stmt->execute()) {
+                    echo "New record created successfully";
+                } else {
+                    echo "Error: Could not execute the query.";
+                }
+            } else {
+                echo "Error: Email or Password is missing.<br>";
+                echo "<pre>";
+                print_r($_POST);
+                echo "</pre>";
+            }
+        } else {
+            echo "Form not submitted via POST.";
+        }
+    }
+}
+
+$db = new Database();
+$formProcessor = new FormProcessor($db);
+$formProcessor->processForm();
+
+?>
 ?>
