@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->send();
         echo 'Message has been sent to your email';
    // Redirect to verification page
-        header('Location: verify.php');
+        header('Location: codeverify.php');
         exit();
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
